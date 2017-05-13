@@ -21,7 +21,7 @@ public class Kothaufen {
             velocity.scl(dt);
         position.add(velocity);
             velocity.scl(1/dt);
-            System.out.println(position);
+            //System.out.println(position);
     }
 
     public Vector3 getPosition() {
