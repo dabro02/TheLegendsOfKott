@@ -42,4 +42,8 @@ public class Kothaufen {
     public void setPosition(Vector3 position) {
         this.position = position;
     }
+
+    public Vector3 getVelocity() {
+        return velocity;
+    }
 }
