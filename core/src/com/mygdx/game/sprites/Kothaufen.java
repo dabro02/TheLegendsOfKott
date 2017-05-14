@@ -1,5 +1,7 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 
@@ -21,8 +23,64 @@ public class Kothaufen {
             velocity.scl(dt);
         position.add(velocity);
             velocity.scl(1/dt);
-            //System.out.println(position);
     }
+
+    public void walkright() {
+        //Richtung: D ->
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            setVelocityX(130);
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                setVelocityY(130);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                setVelocityY(-130);
+            } else {
+                setVelocityY(0);
+            }
+        }
+    }
+
+    public void walkleft() {
+        //Richtung: A <-
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            setVelocityX(-130);
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                setVelocityY(130);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                setVelocityY(-130);
+            } else {
+                setVelocityY(0);
+            }
+        }
+    }
+
+    public void walkup() {
+        //Richtung: W (Oben)
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            setVelocityY(130);
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                setVelocityX(130);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                setVelocityX(-130);
+            } else {
+                setVelocityX(0);
+            }
+        }
+    }
+
+    public void walkdown(){
+        //Richtung: S (Unten)
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            setVelocityY(-130);
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                setVelocityX(130);
+            } else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                setVelocityX(-130);
+            } else {
+                setVelocityX(0);
+            }
+        }
+    }
+
 
     public Vector3 getPosition() {
         return position;
