@@ -19,7 +19,6 @@ public class Gras {
     public Gras(int grasbüschelX, int grasbüschelY, int art){
         this.grasbüschelX = grasbüschelX;
         this.grasbüschelY = grasbüschelY;
-        System.out.println(grasbüschelX+"   "+ grasbüschelY);
         switch (art){
             case 0:
                 grasbüschel = new Texture(Gdx.files.internal("Grasbüschel.png"));
