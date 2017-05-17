@@ -57,22 +57,19 @@ public class HomeState extends State{
         }
 
 
-//Todo
-        if(kott.getPosition().x <= 0){
-            kott.setPosition(new Vector3(1-kott.getKott().getWidth(),kott.getPosition().y,0));
-        }
-        else if(kott.getPosition().y +kott.getKott().getHeight()/2<= 0){
-            kott.setPosition(new Vector3(kott.getPosition().x,1,0));
-        }
-        //----------------
 
+        if(kott.getPosition().x <= 0+kott.getKott().getWidth()/2){
+            kott.setPosition(new Vector3(1+kott.getKott().getWidth()/2,kott.getPosition().y,0));
+        }
         else if(kott.getPosition().x+kott.getKott().getWidth()/2 >= 1920){
             kott.setPosition(new Vector3(1919-kott.getKott().getWidth()/2,kott.getPosition().y,0));
         }
-        else if(kott.getPosition().y+kott.getKott().getHeight()/2 >= 1080){
+        if(kott.getPosition().y+kott.getKott().getHeight()/2 >= 1080){
             kott.setPosition(new Vector3(kott.getPosition().x, 1079-kott.getKott().getWidth()/2,0));
+        }else if(kott.getPosition().y <= 0+kott.getKott().getHeight()/2){
+            kott.setPosition(new Vector3(kott.getPosition().x,1+kott.getKott().getHeight()/2,0));
         }
-        System.out.println(kott.getPosition());
+        //System.out.println(kott.getPosition());
 
 
 
