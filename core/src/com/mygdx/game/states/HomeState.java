@@ -2,6 +2,7 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -13,11 +14,13 @@ import com.mygdx.game.sprites.Kothaufen;
 public class HomeState extends State{
 
     private Kothaufen kott;
+    private Sound kottsound;
 
     public HomeState(GameStateManager gsm) {
         super(gsm);
         Gdx.gl.glClearColor(0.032f, 0.032f, 0.032f, 1);
         kott = new Kothaufen(1920/2,1080/4);
+        kottsound = Gdx.audio.newSound(Gdx.files.internal("Kott-Sound.mp3"));
         cam.setToOrtho(false, 1920,1080);
     }
 
@@ -41,6 +44,10 @@ public class HomeState extends State{
             kott.setVelocityY(0);
         }
 
+        if(Gdx.input.justTouched()){
+            kottsound.play(0.1f);
+        }
+
     }
 
     @Override
@@ -50,7 +57,6 @@ public class HomeState extends State{
         cam.position.set(1920/2, 1080/2-kott.getKott().getHeight()/2,0);
         if(cam.viewportHeight <1080 ) {
             cam.setToOrtho(false, cam.viewportWidth, cam.viewportHeight+9);
-            System.out.println("hallo");
         }
         if( cam.viewportWidth < 1920){
             cam.setToOrtho(false, cam.viewportWidth+16, cam.viewportHeight);
