@@ -3,6 +3,7 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 public class PauseMenuState extends State {
 
     Button testbutton;
+    Sound kottsound;
 
     public PauseMenuState(GameStateManager gsm) {
         super(gsm);
@@ -21,6 +23,7 @@ public class PauseMenuState extends State {
         cam.position.set(new Vector3(1920,1080,0)) ;
         cam.setToOrtho(false, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         testbutton = new Button("Dies ist toll", Gdx.graphics.getWidth()/2-100, Gdx.graphics.getHeight()/2, 200,70);
+        kottsound = Gdx.audio.newSound(Gdx.files.internal("Kott-Sound.mp3"));
     }
 
     @Override
@@ -48,10 +51,13 @@ public class PauseMenuState extends State {
     public void update(float dt) {
         handleInput();
 
-        testbutton.update();
+        if(testbutton.isClicked()){
+            kottsound.play(0.4f);
+        }
 
         //System.out.println(Gdx.input.getX()+"       "+ Gdx.input.getY()+ cam.position);
 
+        testbutton.update();
         cam.update();
     }
 

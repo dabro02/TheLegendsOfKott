@@ -25,6 +25,8 @@ public class Button {
 
     public Vector3 position;
     boolean pointed = false;
+    boolean clicked = false;
+
 
     public Button(String title, int x, int y, int width, int height) {
         this.x = x;
@@ -37,12 +39,24 @@ public class Button {
         glayout = new GlyphLayout();
     }
 
-    public void update(){
+    public void handleInput(){
+
+        if(clicked){
+            clicked = false;
+        }
         if(Gdx.input.getX() >= x && Gdx.input.getX() <= x+width && Gdx.graphics.getHeight()-Gdx.input.getY() <= y+height && Gdx.graphics.getHeight()-Gdx.input.getY() >= y){
             pointed = true;
-            System.out.println(true);
+            if(Gdx.input.justTouched()){
+                clicked = true;
+            }
         }
-        else pointed = false;
+        else{
+            pointed = false;}
+
+    }
+
+    public void update(){
+        handleInput();
     }
 
     public void render(ShapeRenderer sr, SpriteBatch sb){
@@ -54,22 +68,38 @@ public class Button {
 
         }
         else{
+            if(Gdx.input.isTouched()){
+                sr.setColor(Color.BLACK);
+                sr.box(position.x, position.y, position.z, width+2, height+2, 0);
+                sr.setColor(0,0.4f, 0.6f,0.3f);
+                sr.box(position.x+1, position.y+1, position.z,width,height,0);
+            }
+            else{
             sr.setColor(Color.BLACK);
             sr.box(position.x, position.y, position.z, width+4, height+4, 0);
             sr.setColor(0,0.4f, 0.6f,0.3f);
-            sr.box(position.x+3, position.y+3, position.z,width,height,0);
+            sr.box(position.x+3, position.y+3, position.z,width,height,0);}
         }
         //font.draw(sb,title,200,400);
         sr.end();
+
+
         sb.begin();
 
         glayout.setText(font, title.subSequence(0,title.length()));
-        if(pointed)
-            font.draw(sb, title, x+width/2-glayout.width/2+3, y+(height/2+glayout.height/2)+3);
+        if(pointed){
+            if(Gdx.input.isTouched())
+                font.draw(sb, title, x+width/2-glayout.width/2+1, y+(height/2+glayout.height/2)+1);
+            else
+                font.draw(sb, title, x+width/2-glayout.width/2+3, y+(height/2+glayout.height/2)+3);
+        }
         else
-            font.draw(sb, title, x+width/2-glayout.width/2, y+(height/2+glayout.height/2));
-
+                font.draw(sb, title, x+width/2-glayout.width/2, y+(height/2+glayout.height/2));
         sb.end();
 
+    }
+
+    public boolean isClicked() {
+        return clicked;
     }
 }
