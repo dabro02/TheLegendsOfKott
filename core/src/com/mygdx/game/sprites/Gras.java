@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 
 import java.util.Random;
 
@@ -13,12 +14,10 @@ import java.util.Random;
 public class Gras {
 
     Texture grasbüschel;
-    int grasbüschelX = 0;
-    int grasbüschelY = 0;
+    Vector3 position;
 
     public Gras(int grasbüschelX, int grasbüschelY, int art){
-        this.grasbüschelX = grasbüschelX;
-        this.grasbüschelY = grasbüschelY;
+        position = new Vector3(grasbüschelX, grasbüschelY,0);
         switch (art){
             case 0:
                 grasbüschel = new Texture(Gdx.files.internal("Grasbüschel.png"));
@@ -45,22 +44,22 @@ public class Gras {
     }
 
     public void draw(SpriteBatch sb) {
-        sb.draw(grasbüschel, grasbüschelX,grasbüschelY);
+        sb.draw(grasbüschel, position.x,position.y);
     }
 
     public int getGrasbüschelX() {
-        return grasbüschelX;
+        return (int) position.x;
     }
 
     public void setGrasbüschelX(int grasbüschelX) {
-        this.grasbüschelX = grasbüschelX;
+        this.position.x = grasbüschelX;
     }
 
     public int getGrasbüschelY() {
-        return grasbüschelY;
+        return (int) position.y;
     }
 
     public void setGrasbüschelY(int grasbüschelY) {
-        this.grasbüschelY = grasbüschelY;
+        this.position.y = grasbüschelY;
     }
 }

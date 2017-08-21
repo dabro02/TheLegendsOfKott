@@ -32,7 +32,7 @@ public class HomeState extends State{
         //Exit fullscreen
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             if(!Gdx.graphics.isFullscreen()){
-                Gdx.graphics.setDisplayMode(super.Width,super.Height,!Gdx.graphics.isFullscreen());
+                Gdx.graphics.setDisplayMode(super.width,super.height,!Gdx.graphics.isFullscreen());
             }
             else{
                 Gdx.graphics.setDisplayMode(super.windowWidth,super.windowHeight,!Gdx.graphics.isFullscreen());

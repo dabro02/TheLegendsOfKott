@@ -2,8 +2,11 @@ package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.states.State;
 
 /**
  * Created by Daniel on 13.05.2017.
@@ -13,17 +16,31 @@ public class Kothaufen {
     private Vector3 velocity;
     Texture kott;
     int status;
+    int width;
+    int height;
 
     public Kothaufen(int x, int y) {
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
-        kott = new Texture("Kothaufen.png");
+        kott = new Texture(Gdx.files.internal("Kothaufen.png"));
+    }
+
+    public Kothaufen(int x, int y, int width, int height){
+        position = new Vector3(x,y,0);
+        velocity = new Vector3(0,0,0);
+        kott = new Texture(Gdx.files.internal("Kothaufen.png"));
+        this.width=width;
+        this.height=height;
     }
 
     public void update(float dt) {
             velocity.scl(dt);
         position.add(velocity);
             velocity.scl(1/dt);
+    }
+
+    public void render(SpriteBatch sb) {
+        sb.draw(kott, position.x, position.y);
     }
 
     public void walkright() {
@@ -75,8 +92,8 @@ public class Kothaufen {
         if(Gdx.input.isTouched()){
 
             if(status == 1){
-                setVelocityX(-(Gdx.graphics.getWidth()/2-Gdx.input.getX()));
-                setVelocityY(Gdx.graphics.getHeight()/2-Gdx.input.getY());
+                setVelocityX(-(1920/2-(float)1920/width*Gdx.input.getX()));
+                setVelocityY(1080/2-(float)1080/height*Gdx.input.getY());
             }
             else if(status == 2) {
                 setVelocityX(-(getPosition().x-Gdx.input.getX()));
