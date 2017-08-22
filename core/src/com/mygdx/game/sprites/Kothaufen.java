@@ -1,12 +1,14 @@
 package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.states.State;
+import com.sun.prism.image.ViewPort;
 
 /**
  * Created by Daniel on 13.05.2017.
@@ -18,19 +20,22 @@ public class Kothaufen {
     int status;
     int width;
     int height;
+    Viewport viewport;
 
-    public Kothaufen(int x, int y) {
+    public Kothaufen(int x, int y, Viewport viewport) {
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
         kott = new Texture(Gdx.files.internal("Kothaufen.png"));
+        this.viewport = viewport;
     }
 
-    public Kothaufen(int x, int y, int width, int height){
+    public Kothaufen(int x, int y, int width, int height, Viewport viewport){
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
         kott = new Texture(Gdx.files.internal("Kothaufen.png"));
         this.width=width;
         this.height=height;
+        this.viewport = viewport;
     }
 
     public void update(float dt) {
@@ -92,12 +97,12 @@ public class Kothaufen {
         if(Gdx.input.isTouched()){
 
             if(status == 1){
-                setVelocityX(-(1920/2-(float)1920/width*Gdx.input.getX()));
-                setVelocityY(1080/2-(float)1080/height*Gdx.input.getY());
+                setVelocityX(-(position.x-viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY())).x));
+                setVelocityY(-(position.y-viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY())).y));
             }
             else if(status == 2) {
-                setVelocityX(-(getPosition().x-Gdx.input.getX()));
-                setVelocityY(-((getPosition().y)-(Gdx.graphics.getHeight()-Gdx.input.getY())));
+                setVelocityX(-(getPosition().x-viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY())).x));
+                setVelocityY(-((getPosition().y-kott.getHeight()/2)-(Gdx.graphics.getHeight()-viewport.unproject(new Vector2(Gdx.input.getX(), Gdx.input.getY())).y)));
             }
         }
         else {

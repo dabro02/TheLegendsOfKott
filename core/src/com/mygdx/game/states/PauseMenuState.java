@@ -50,13 +50,13 @@ public class PauseMenuState extends State {
         saveAndExit = new Button("Save and Exit", Gdx.graphics.getWidth()/2-100, Gdx.graphics.getHeight()/5, 200,70);
 
 
-        kott1 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200));
+        kott1 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200),viewport);
         kott1.setStatus(0);
-        kott2 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200));
+        kott2 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200),viewport);
         kott2.setStatus(0);
-        kott3 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200));
+        kott3 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200),viewport);
         kott3.setStatus(0);
-        kott4 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200));
+        kott4 = new Kothaufen(math.random(200, Gdx.graphics.getWidth()-200),math.random(200, Gdx.graphics.getHeight()-200),viewport);
         kott4.setStatus(0);
         //velocity of Kotthaufen
         kott1.setVelocityX(math.random(300,400));
